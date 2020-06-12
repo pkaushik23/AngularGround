@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http'
 import { Observable } from 'rxjs/internal/Observable';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject, ReplaySubject, AsyncSubject } from 'rxjs';
 
 
 @Component({
@@ -23,10 +23,11 @@ export class PlayBoxComponent implements OnInit {
   private uniCastBase = 10;
 
   ngOnInit() {
-    this.ExperimentRxJs();
+    //this.ExperimentRxJsObservables();
+    this.ExperimentAdvanceSubjects();
   }
 
-  private ExperimentRxJs(){
+  private ExperimentRxJsObservables(){
     //custom observable
     this.customObservable = new Observable((observer)=>{
       setInterval(()=>{ 
@@ -77,5 +78,40 @@ export class PlayBoxComponent implements OnInit {
     this.users$.subscribe(data => { 
       this.userList = data;
     });
+  }
+  private ExperimentAdvanceSubjects(){
+    //Behaviour Subject
+    let bSubject = new BehaviorSubject(10);
+    console.log(bSubject.value,'just afte init');
+    bSubject.next(12);
+    bSubject.subscribe(data=>console.log(data, 'quite late after'));
+    console.log(bSubject.value,'last value');
+
+    //Replay Subject
+    console.log('Replay Subject');
+    let replaySubject = new ReplaySubject(2,1000);
+    replaySubject.next(10);
+    replaySubject.next(20);
+    replaySubject.next(30);
+    replaySubject.subscribe(data=>
+      {console.log(data)}
+    );
+    
+    //AsyncSubject
+    console.log('Async Subject');
+    let aSub = new AsyncSubject();
+    aSub.subscribe(d=>console.log(d));
+    aSub.next(10);
+    aSub.subscribe(d=>console.log(d));
+    aSub.next(20);
+    aSub.subscribe(d=>console.log(d));
+    aSub.next(30);
+    //all sub will print 30
+    aSub.complete();
+    aSub.subscribe(d=>console.log(d,'last from async subject'));
+    
+
+    
+    
   }
 }

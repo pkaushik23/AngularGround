@@ -1,5 +1,24 @@
 Subscribe to Observables
 ========================
+
+**IMPORTANT** :-
+Everytime we subscribe to an observable, each subscriber will have it own execution flow. That means, the code which generate data inside the observable (next) will be executed once for each subscriber. That means, they are *UNICAST*.
+
+```sh
+private uniCastBase = 10;
+let unicast = new Observable(observar=>{
+      observar.next(++this.uniCastBase);
+    });
+unicast.subscribe(data=> {
+    console.log('unicast sub 1', data)
+    });
+unicast.subscribe(data=> {
+    console.log('unicast sub 2', data)
+    });
+```
+
+---------------------------------------
+
 There are two ways to subscribe.
 1) when using in a template can directly use the **async pipe**
 

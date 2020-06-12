@@ -1,0 +1,15 @@
+
+<h2>Playbox works!!</h2>
+
+<h3> Users/Actors </h3>   
+<ul class="card-container">
+    <li style="list-style: none;" *ngFor="let user of users$ | async">
+            <span class="card card-small">
+                {{user.name}}
+            </span>
+    </li>
+</ul>
+<p>Custom observer : {{customObservable | async}}</p>
+
+
+

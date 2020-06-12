@@ -6,4 +6,4 @@ Angular QuickStart Source and Base Documentation @ https://github.com/angular/qu
 
 * Repository to carry out small POC while i learn/refresh few concepts.
 * On the root, there is a folder named 'HOW' which contains steps for these small experiments. 
-* Each of the experient will be in a branch. For example *'routing'*
+* Each of the experiment/task will be in a branch. For example *'routing'* [routing](https://github.com/pkaushik23/AngularGround/tree/routing) . The branches will be kept merging in the master.
